@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Competition</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Segoe UI,Arial;
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+.container{
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  width:100%;
+  max-width:800px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+h1,h2{margin-bottom:15px}
+.btn{
+  padding:12px 30px;
+  margin:10px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  background:#6a11cb;
+  color:white;
+  font-size:16px;
+}
+.btn:hover{background:#4a00e0}
+input,select{
+  padding:10px;
+  width:100%;
+  max-width:400px;
+  margin:10px auto;
+  display:block;
+}
+.hide{display:none}
+
+/* QUIZ */
+#question{font-size:22px;font-weight:bold;margin-bottom:20px}
+#answer-buttons{display:flex;flex-direction:column;align-items:center}
+.quiz-btn{
+  background:#007bff;
+  width:80%;
+}
+.quiz-btn:hover{background:purple}
+.correct{background:green!important}
+.wrong{background:red!important}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<div class="container" id="home-page">
+  <h1>Sourashtra College (Autonomous)</h1>
+  <h2>Department of Computer Science</h2>
+  <p>Quiz & Debugging Competition</p>
+  <button class="btn" id="register-btn">Register Now</button>
+</div>
+
+<!-- REGISTRATION -->
+<div class="container hide" id="registration-page">
+  <h2>Registration</h2>
+  <form id="regForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="text" id="regno" placeholder="Register No" required>
+    <select id="year" required>
+      <option value="">Select Year</option>
+      <option>1st Year</option>
+      <option>2nd Year</option>
+      <option>3rd Year</option>
+    </select>
+    <button class="btn" type="submit">Submit</button>
+  </form>
+</div>
+
+<!-- COMPETITION -->
+<div class="container hide" id="competition-page">
+  <h2>Select Competition</h2>
+  <button class="btn" id="quiz-btn">Quiz</button>
+</div>
+
+<!-- QUIZ PAGE -->
+<div class="container hide" id="quiz-page">
+  <h2>KOLLYWOOD QUIZ</h2>
+  <div id="question-container">
+    <div id="question"></div>
+    <div id="answer-buttons"></div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="container hide" id="result-page">
+  <h2>Result</h2>
+  <p>Name: <span id="r-name"></span></p>
+  <p>Register No: <span id="r-reg"></span></p>
+  <p>Year: <span id="r-year"></span></p>
+  <h2 id="r-score"></h2>
+  <button class="btn" onclick="location.reload()">Home</button>
+</div>
+
+<script>
+/* NAVIGATION */
+const home=homePage=document.getElementById("home-page");
+const reg=document.getElementById("registration-page");
+const comp=document.getElementById("competition-page");
+const quiz=document.getElementById("quiz-page");
+const result=document.getElementById("result-page");
+
+function show(p){
+  [home,reg,comp,quiz,result].forEach(x=>x.classList.add("hide"));
+  p.classList.remove("hide");
+}
+
+document.getElementById("register-btn").onclick=()=>show(reg);
+document.getElementById("quiz-btn").onclick=()=>show(quiz);
+
+/* REGISTRATION */
+document.getElementById("regForm").onsubmit=e=>{
+  e.preventDefault();
+  localStorage.setItem("name",name.value);
+  localStorage.setItem("reg",regno.value);
+  localStorage.setItem("year",year.value);
+  show(comp);
+};
+
+/* QUIZ QUESTIONS */
+const questions=[
+{
+question:"Who was the comedian in the movie UNAKKUM ENAKKUM?",
+answers:[
+{text:"Santhanam",correct:true},
+{text:"Suri",correct:false},
+{text:"Vadivelu",correct:false},
+{text:"Sathish",correct:false}
+]},
+{
+question:"The song INNUM KONJA NERAM IRUNTHA THAN ENNA was sung by",
+answers:[
+{text:"Srinivas",correct:false},
+{text:"Vijay Prakash",correct:true},
+{text:"Shankar Mahadevan",correct:false},
+{text:"Karthik",correct:false}
+]},
+{
+question:"Vadivelu played VANDU MURUGAN in?",
+answers:[
+{text:"Marudhamalai",correct:false},
+{text:"Ellam Avan Seyal",correct:true},
+{text:"Thirumalai",correct:false},
+{text:"Kaaka Kaaka",correct:false}
+]},
+{
+question:"Youngest music composer (16 years)?",
+answers:[
+{text:"Harris Jayaraj",correct:false},
+{text:"ARR",correct:false},
+{text:"GV Prakash",correct:false},
+{text:"Yuvan Shankar Raja",correct:true}
+]},
+{
+question:"3rd generation of Sivaji Ganesan?",
+answers:[
+{text:"Dhruv Vikram",correct:false},
+{text:"Vikram Prabhu",correct:true},
+{text:"Atharva",correct:false},
+{text:"Aathi",correct:false}
+]}
+];
+
+let index=0,score=0;
+const qEl=document.getElementById("question");
+const ansBtn=document.getElementById("answer-buttons");
+
+function showQuestion(){
+  ansBtn.innerHTML="";
+  const q=questions[index];
+  qEl.textContent=q.question;
+  q.answers.forEach(a=>{
+    const b=document.createElement("button");
+    b.textContent=a.text;
+    b.className="btn quiz-btn";
+    b.onclick=()=>selectAnswer(a.correct,b);
+    ansBtn.appendChild(b);
+  });
+}
+
+function selectAnswer(correct,btn){
+  if(correct){score++;btn.classList.add("correct")}
+  else btn.classList.add("wrong");
+  [...ansBtn.children].forEach(b=>b.disabled=true);
+  setTimeout(()=>{
+    index++;
+    index<questions.length?showQuestion():showResult();
+  },1000);
+}
+
+function showResult(){
+  show(result);
+  r-name.textContent=localStorage.getItem("name");
+  r-reg.textContent=localStorage.getItem("reg");
+  r-year.textContent=localStorage.getItem("year");
+  r-score.textContent=`Score: ${score} / ${questions.length}`;
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>

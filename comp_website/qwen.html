@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Competition</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif,'Times New Roman', Times, serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            transition: background 0.5s ease;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.92);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        body:hover .container {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+        
+        h1, h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: #4a148c;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        
+        p {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 117, 252, 0.6);
+            background: linear-gradient(45deg, #4a00e0, #8e2de2);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(100, 100);
+                opacity: 0;
+            }
+        }
+        
+        .btn-quiz {
+            background: linear-gradient(45deg, #9d50ff, #6e00ff);
+            box-shadow: 0 4px 15px rgba(110, 0, 255, 0.4);
+        }
+        
+        .btn-quiz:hover {
+            background: linear-gradient(45deg, #8a3cff, #5a00cc);
+            box-shadow: 0 6px 20px rgba(110, 0, 255, 0.6);
+        }
+        
+        .btn-debug {
+            background: linear-gradient(45deg, #00c9ff, #92fe9d);
+            box-shadow: 0 4px 15px rgba(0, 201, 255, 0.4);
+            color: #0a3d4d;
+        }
+        
+        .btn-debug:hover {
+            background: linear-gradient(45deg, #00b3e6, #7ad684);
+            box-shadow: 0 6px 20px rgba(0, 201, 255, 0.6);
+        }
+        
+        .btn-register {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+        }
+        
+        .btn-register:hover {
+            background: linear-gradient(45deg, #e63057, #e63920);
+            box-shadow: 0 6px 20px rgba(255, 75, 43, 0.6);
+        }
+        
+        .btn-submit {
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+            box-shadow: 0 4px 15px rgba(0, 176, 155, 0.4);
+        }
+        
+        .btn-submit:hover {
+            background: linear-gradient(45deg, #009688, #86b333);
+            box-shadow: 0 6px 20px rgba(0, 176, 155, 0.6);
+        }
+        
+        .btn-back {
+            background: linear-gradient(45deg, #546e7a, #455a64);
+            box-shadow: 0 4px 15px rgba(69, 90, 100, 0.4);
+        }
+        
+        .btn-back:hover {
+            background: linear-gradient(45deg, #455a64, #37474f);
+            box-shadow: 0 6px 20px rgba(69, 90, 100, 0.6);
+        }
+        
+        .btn-fullscreen {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
+            color: #8b0000;
+        }
+        
+        .btn-fullscreen:hover {
+            background: linear-gradient(45deg, #ff7a80, #e8b4a5);
+            box-shadow: 0 6px 20px rgba(255, 154, 158, 0.6);
+        }
+        
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        label {
+            font-weight: 600;
+            margin: 5px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            align-self: flex-start;
+            margin-left: 20px;
+        }
+        
+        input, select {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+        }
+        
+        /* Competition Page Styles */
+        .competition-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            padding: 20px;
+        }
+        
+        .competition-btns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        /* Registration Page Styles */
+        body#register-page {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+        }
+        
+        body#register-page .container {
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #ff4d6d;
+        }
+        
+        body#register-page input, 
+        body#register-page select, 
+        body#register-page button {
+            border: 2px solid #ff4d6d !important;
+        }
+        
+        body#register-page input:focus, 
+        body#register-page select:focus {
+            border-color: #c9184a !important;
+            box-shadow: 0 0 0 3px rgba(201, 24, 74, 0.2) !important;
+        }
+        
+        /* Quiz Page Styles */
+        .question {
+            margin: 20px 0;
+            padding: 0;
+            background: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        .question:hover {
+            transform: none;
+            background: none;
+        }
+        
+        .question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.15rem;
+            text-align: left;
+            margin-left: 20px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px;
+            gap: 12px;
+            margin: 0 auto;
+            margin-top: 8px;
+        }
+        
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            background: #f9f9f9;
+            transition: 0.25s;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .options label:hover {
+            background: #eef2ff;
+            border-color: #6a11cb;
+        }
+        
+        .options input[type="radio"] {
+            transform: scale(1.2);
+            accent-color: #6a11cb;
+        }
+        
+        /* Selected option */
+        .options label:has(input:checked) {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border-color: #4a00e0;
+        }
+        
+        /* Result Page Styles */
+        .result-card {
+            background: linear-gradient(135deg, #43cea2, #185a9d);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+        }
+        
+        .result-card p {
+            font-size: 1.3rem;
+            margin: 12px 0;
+            text-align: left;
+            padding-left: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .result-card span {
+            font-weight: bold;
+            color: #ffd700;
+            margin-left: 10px;
+        }
+        
+        .score-display {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin: 20px 0;
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .disqualified {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b) !important;
+        }
+        
+        .disqualified .score-display {
+            background: linear-gradient(45deg, #fff, #ddd) !important;
+            color: #8b0000 !important;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        /* Navigation */
+        .nav-btns {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 25px;
+        }
+        
+        /* Warning Banner for Quiz Page */
+        .warning-banner {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .warning-banner::before {
+            content: "⚠️";
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        
+        .monitoring-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+        
+        .status-dot {
+            width: 15px;
+            height: 15px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .fullscreen-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        /* Violation Counter */
+        .violation-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: bounce 0.5s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Overlay for disqualification */
+        .disqualification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        
+        .disqualification-overlay h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #ff4d4d;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        .disqualification-overlay p {
+            font-size: 1.8rem;
+            max-width: 800px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .disqualification-overlay .btn {
+            margin-top: 20px;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .container {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .btn {
+            animation: fadeIn 0.6s ease-out 0.2s forwards;
+            animation-fill-mode: backwards;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .competition-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .options {
+                width: 95%;
+            }
+            
+            .violation-counter {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Fullscreen styles */
+        body.fullscreen {
+            background: #0a0a1a;
+        }
+        
+        body.fullscreen .container {
+            max-width: 95%;
+            margin: 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+        
+        body.fullscreen .nav-btns {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        body.fullscreen .btn-back {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: fadeIn 0.4s;
+        }
+        
+        .modal h3 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .modal p {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .modal .btn {
+            padding: 10px 25px;
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: #7f8c8d;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .close-modal:hover {
+            background: #f5f5f5;
+            color: #e74c3c;
+            transform: rotate(90deg);
+        }
+        /* Question */
+.question{
+    margin-bottom:25px;
+}
+
+.question p{
+    font-weight:600;
+    margin-bottom:10px;
+    text-align:left;
+    color:#2c3e50;
+}
+
+/* OPTIONS — FIXED STRUCTURE */
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+/* EACH OPTION ROW */
+.options label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    border-radius:8px;
+    background:#f7f7f7;
+    border:2px solid #e0e0e0;
+    cursor:pointer;
+    transition:0.3s;
+    width:100%;
+}
+
+/* Hover */
+.options label:hover{
+    background:#eef2ff;
+    border-color:#6a11cb;
+}
+
+/* Radio */
+.options input[type="radio"]{
+    transform:scale(1.2);
+    accent-color:#6a11cb;
+}
+
+/* Selected Option */
+.options label:has(input:checked){
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+    color:white;
+    border-color:#4a00e0;
+}
+
+/* Buttons */
+.btn{
+    display:block;
+    margin:30px auto 0;
+    padding:14px 35px;
+    font-size:1rem;
+    font-weight:600;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(45deg,#00b09b,#96c93d);
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 25px rgba(0,0,0,0.4);
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+    </style>
+</head>
+<body>
+
+    <!-- Home Page Content -->
+    <div class="container" id="home-page">
+        <h1>Sourashtra College(Autonomous)</h1>
+        <h2>Department of Computer Science <br>Charles Babbage Association</h2>
+        <p>Test your skills in Quiz and Debugging competitions</p>
+        <p>Showcase your talent and win exciting prizes!</p>
+        <button class="btn btn-register" id="register-btn">Register Now</button>
+    </div>
+
+    <!-- Competition Selection Page (Hidden Initially) -->
+    <div class="container" id="competition-page" style="display: none;">
+        <h2>Select Competition</h2>
+        <p>Choose the competition you want to participate in:</p>
+        <div class="competition-btns">
+            <button class="btn btn-quiz" id="quiz-btn">Quiz</button>
+            <button class="btn btn-debug" id="debug-btn">Debugging</button>
+        </div>
+        <!-- <div class="nav-btns">
+            <button class="btn btn-back" id="back-home"></button>
+        </div> -->
+    </div>
+
+    <!-- Registration Page (Hidden Initially) -->
+    <div class="container" id="registration-page" style="display: none;">
+        <h2>Registration Form</h2>
+        <form id="regForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            
+            <label for="regno">Register No:</label>
+            <input type="text" id="regno" name="regno" required placeholder="Enter your registration number">
+            
+            <label for="year">Year:</label>
+            <select id="year" name="year" required>
+                <option value="" disabled selected>Select your year</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+            </select>
+            
+            <button type="submit" class="btn btn-submit">Submit Registration</button>
+        </form>
+        <div class="nav-btns">
+            <button class="btn btn-back" id="back-home-reg">← Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Quiz Page (Hidden Initially) -->
+    <div class="container" id="quiz-page" style="display: none;">
+        <div class="violation-counter" id="violation-counter">0</div>
+        <div class="warning-banner">
+            EXAM MODE: Switching tabs or leaving this window will result in disqualification
+        </div>
+        <div class="monitoring-status">
+            <div class="status-dot"></div>
+            <span>Exam monitoring active - Do not switch tabs or minimize window</span>
+        </div>
+        <div class="fullscreen-warning">
+            For best experience and to prevent accidental tab switches, click the "Enter Fullscreen" button below.
+        </div>
+        
+        <h2>Quiz Competition</h2>
+        <p>Answer all questions carefully. Good luck!</p>
+        <form id="quizForm">
+            <div class="question">
+                <p>1. What is HTML?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="0"> Programming Language</label>
+                    <label><input type="radio" name="q1" value="1"> Markup Language</label>
+                    <label><input type="radio" name="q1" value="0"> Operating System</label>
+                    <label><input type="radio" name="q1" value="0"> Database</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>2. Which language is used for styling web pages?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="0"> JavaScript</label>
+                    <label><input type="radio" name="q2" value="1"> CSS</label>
+                    <label><input type="radio" name="q2" value="0"> Python</label>
+                    <label><input type="radio" name="q2" value="0"> Java</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>3. What does CSS stand for?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="0"> Creative Style System</label>
+                    <label><input type="radio" name="q3" value="0"> Computer Style Sheets</label>
+                    <label><input type="radio" name="q3" value="1"> Cascading Style Sheets</label>
+                    <label><input type="radio" name="q3" value="0"> Colorful Style Sheets</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>4. Which HTML tag is used for creating a hyperlink?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="0"> &lt;link&gt;</label>
+                    <label><input type="radio" name="q4" value="1"> &lt;a&gt;</label>
+                    <label><input type="radio" name="q4" value="0"> &lt;href&gt;</label>
+                    <label><input type="radio" name="q4" value="0"> &lt;url&gt;</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>5. What is the correct HTML element for inserting a line break?</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="1"> &lt;br&gt;</label>
+                    <label><input type="radio" name="q5" value="0"> &lt;lb&gt;</label>
+                    <label><input type="radio" name="q5" value="0"> &lt;break&gt;</label>
+                    <label><input type="radio" name="q5" value="0"> &lt;newline&gt;</label>
+                </div>
+            </div>
+            
+            <div style="margin: 25px 0;">
+                <button type="button" class="btn btn-fullscreen" id="fullscreen-btn">Enter Fullscreen Mode</button>
+            </div>
+            
+            <button type="submit" class="btn btn-submit">Submit Answers</button>
+        </form>
+        <div class="nav-btns">
+            <!-- <button class="btn btn-back" id="back-competition"></button> -->
+        </div>
+    </div>
+
+    <!-- Result Page (Hidden Initially) -->
+    <div class="container" id="result-page" style="display: none;">
+        <h2>Competition Results</h2>
+        <div class="result-card" id="result-card">
+            <p>Name: <span id="result-name">John Doe</span></p>
+            <p>Register No: <span id="result-regno">2021CS000</span></p>
+            <p>Year: <span id="result-year">2nd Year</span></p>
+            <p>Competition: <span id="result-competition">Quiz</span></p>
+            <div class="score-display" id="score-display">0/5</div>
+            <p>Score: <span id="result-score">0</span> out of 5</p>
+        </div>
+        <!-- <div class="nav-btns">
+            <button class="btn btn-back" id="back-competition-result"></button>
+            <button class="btn btn-register" id="new-competition"></button>
+        </div> -->
+    </div>
+    
+    <!-- Disqualification Overlay -->
+    <div class="disqualification-overlay" id="disqualification-overlay">
+        <h2>DISQUALIFIED</h2>
+        <p>You have been disqualified from the exam for switching tabs or leaving the exam window.</p>
+        <p>Your exam has been automatically submitted with a score of 0.</p>
+        <button class="btn btn-back" id="disqualification-back">Return to Home Page</button>
+    </div>
+    
+    <!-- Warning Modal -->
+    <div class="modal" id="warning-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-warning">&times;</button>
+            <h3>⚠️ EXAM WARNING</h3>
+            <p>You are about to switch tabs or minimize the exam window. This is not allowed during the exam.</p>
+            <p><strong>First violation:</strong> You will receive a warning.</p>
+            <p><strong>Second violation:</strong> Your exam will be automatically submitted with a score of 0.</p>
+            <p>Please stay on this tab until you complete your exam.</p>
+            <div class="modal-buttons">
+                <button class="btn btn-back" id="continue-exam">Continue Exam</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Beforeunload Warning Modal -->
+    <div class="modal" id="beforeunload-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-beforeunload">&times;</button>
+            <h3>⚠️ EXAM IN PROGRESS</h3>
+            <p>You are currently taking an exam. If you navigate away from this page, refresh, or close the tab, you will be disqualified.</p>
+            <p>Are you sure you want to leave this page?</p>
+            <div class="modal-buttons">
+                <button class="btn btn-back" id="stay-on-page">Stay on Page</button>
+                <button class="btn btn-register" id="leave-page">Leave Page (Disqualified)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const homePage = document.getElementById('home-page');
+        const competitionPage = document.getElementById('competition-page');
+        const registrationPage = document.getElementById('registration-page');
+        const quizPage = document.getElementById('quiz-page');
+        const resultPage = document.getElementById('result-page');
+        const disqualificationOverlay = document.getElementById('disqualification-overlay');
+        const warningModal = document.getElementById('warning-modal');
+        const beforeunloadModal = document.getElementById('beforeunload-modal');
+        
+        const registerBtn = document.getElementById('register-btn');
+        const backHomeBtn = document.getElementById('back-home');
+        const backHomeRegBtn = document.getElementById('back-home-reg');
+        const quizBtn = document.getElementById('quiz-btn');
+        const debugBtn = document.getElementById('debug-btn');
+        const backCompetitionBtn = document.getElementById('back-competition');
+        const backCompetitionResultBtn = document.getElementById('back-competition-result');
+        const newCompetitionBtn = document.getElementById('new-competition');
+        const disqualificationBackBtn = document.getElementById('disqualification-back');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const closeWarningBtn = document.getElementById('close-warning');
+        const continueExamBtn = document.getElementById('continue-exam');
+        const closeBeforeunloadBtn = document.getElementById('close-beforeunload');
+        const stayOnPageBtn = document.getElementById('stay-on-page');
+        const leavePageBtn = document.getElementById('leave-page');
+        
+        const regForm = document.getElementById('regForm');
+        const quizForm = document.getElementById('quizForm');
+        const violationCounter = document.getElementById('violation-counter');
+        const resultCard = document.getElementById('result-card');
+        
+        // Tracking variables
+        let isQuizActive = false;
+        let violationCount = 0;
+        let isFullscreen = false;
+        let pageVisibilityState = "visible";
+        let beforeunloadTriggered = false;
+        
+        // Page Navigation Functions
+        function showPage(pageToShow) {
+            // Hide all pages
+            homePage.style.display = 'none';
+            competitionPage.style.display = 'none';
+            registrationPage.style.display = 'none';
+            quizPage.style.display = 'none';
+            resultPage.style.display = 'none';
+            
+            // Show selected page
+            pageToShow.style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Reset violation counter when leaving quiz page
+            if (pageToShow !== quizPage) {
+                violationCount = 0;
+                violationCounter.textContent = "0";
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+                window.removeEventListener('beforeunload', handleBeforeUnload);
+                document.removeEventListener('fullscreenchange', handleFullscreenChange);
+                document.body.classList.remove('fullscreen');
+                isQuizActive = false;
+            }
+            
+            // Set up quiz monitoring when entering quiz page
+            if (pageToShow === quizPage) {
+                isQuizActive = true;
+                violationCount = 0;
+                violationCounter.textContent = "0";
+                document.addEventListener('visibilitychange', handleVisibilityChange);
+                window.addEventListener('beforeunload', handleBeforeUnload);
+                document.addEventListener('fullscreenchange', handleFullscreenChange);
+                localStorage.removeItem('disqualified');
+            }
+        }
+        
+        // Handle tab switching and window visibility changes
+        function handleVisibilityChange() {
+            if (!isQuizActive) return;
+            
+            if (document.visibilityState === 'hidden' && pageVisibilityState === 'visible') {
+                // User is switching away from the tab or minimizing the window
+                violationCount++;
+                violationCounter.textContent = violationCount;
+                
+                // Show warning modal for first violation
+                if (violationCount === 1) {
+                    warningModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                } 
+                // Disqualify on second violation
+                else if (violationCount >= 2) {
+                    disqualifyStudent();
+                }
+            }
+            
+            pageVisibilityState = document.visibilityState;
+        }
+        
+        // Handle beforeunload event (refresh, close tab, navigate away)
+        function handleBeforeUnload(e) {
+            if (isQuizActive && !beforeunloadTriggered) {
+                beforeunloadTriggered = true;
+                e.preventDefault();
+                beforeunloadModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                
+                // Prevent default browser dialog
+                e.returnValue = '';
+                return '';
+            }
+        }
+        
+        // Handle fullscreen changes
+        function handleFullscreenChange() {
+            isFullscreen = !isFullscreen;
+            if (isFullscreen) {
+                document.body.classList.add('fullscreen');
+            } else {
+                document.body.classList.remove('fullscreen');
+            }
+        }
+        
+        // Disqualify the student
+        function disqualifyStudent() {
+            // Clean up event listeners
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
+            
+            // Set disqualification flags
+            localStorage.setItem('disqualified', 'true');
+            localStorage.setItem('score', '0');
+            
+            // Show disqualification overlay
+            disqualificationOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Auto-submit the quiz with 0 score after a delay
+            setTimeout(() => {
+                showResultPage();
+            }, 5000);
+        }
+        
+        // Event Listeners for Navigation
+        registerBtn.addEventListener('click', () => {
+            showPage(registrationPage);
+        });
+        
+        // backHomeBtn.addEventListener('click', () => {
+        //     showPage(homePage);
+        // });
+        
+        backHomeRegBtn.addEventListener('click', () => {
+            showPage(homePage);
+        });
+        
+        quizBtn.addEventListener('click', () => {
+            showPage(quizPage);
+            // Store competition type
+            localStorage.setItem('competitionType', 'Quiz');
+        });
+        
+        debugBtn.addEventListener('click', () => {
+            alert("Debugging competition will be available soon! For now, try the Quiz competition.");
+            showPage(quizPage);
+            localStorage.setItem('competitionType', 'Debugging');
+        });
+        
+        // backCompetitionBtn.addEventListener('click', () => {
+        //     if (isQuizActive) {
+        //         if (confirm("You will lose your progress if you go back. Are you sure?")) {
+        //             showPage(competitionPage);
+        //         }
+        //     } else {
+        //         showPage(competitionPage);
+        //     }
+        // });
+        
+        // backCompetitionResultBtn.addEventListener('click', () => {
+        //     showPage(competitionPage);
+        // });
+        
+        // newCompetitionBtn.addEventListener('click', () => {
+        //     showPage(competitionPage);
+        // });
+        
+        disqualificationBackBtn.addEventListener('click', () => {
+            disqualificationOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            showPage(homePage);
+        });
+        
+        // Fullscreen functionality
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        });
+        
+        // Warning modal handlers
+        closeWarningBtn.addEventListener('click', () => {
+            warningModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        continueExamBtn.addEventListener('click', () => {
+            warningModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Beforeunload modal handlers
+        closeBeforeunloadBtn.addEventListener('click', () => {
+            beforeunloadModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            beforeunloadTriggered = false;
+        });
+        
+        stayOnPageBtn.addEventListener('click', () => {
+            beforeunloadModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            beforeunloadTriggered = false;
+        });
+        
+        leavePageBtn.addEventListener('click', () => {
+            // Allow navigation to happen
+            beforeunloadTriggered = false;
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+            localStorage.setItem('disqualified', 'true');
+            localStorage.setItem('score', '0');
+            beforeunloadModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            showPage(homePage);
+        });
+        
+        // Registration Form Handling
+        regForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const regno = document.getElementById('regno').value;
+            const year = document.getElementById('year').value;
+            
+            // Store in localStorage
+            localStorage.setItem('userName', name);
+            localStorage.setItem('regNo', regno);
+            localStorage.setItem('year', year);
+            
+            // Show competition page
+            showPage(competitionPage);
+            
+            // Reset form
+            regForm.reset();
+            
+            // Show success message
+            setTimeout(() => {
+                alert(`Registration successful, ${name}! Welcome to the competitions.`);
+            }, 300);
+        });
+        
+        // Quiz Form Handling
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Clean up monitoring
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
+            isQuizActive = false;
+            
+            // Calculate score
+            let score = 0;
+            
+            // Check each question
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            const q4 = document.querySelector('input[name="q4"]:checked');
+            const q5 = document.querySelector('input[name="q5"]:checked');
+            
+            if (q1 && q1.value === "1") score++;
+            if (q2 && q2.value === "1") score++;
+            if (q3 && q3.value === "1") score++;
+            if (q4 && q4.value === "1") score++;
+            if (q5 && q5.value === "1") score++;
+            
+            // Store score
+            localStorage.setItem('score', score);
+            
+            // Show result page
+            showResultPage();
+        });
+        
+        // Result Page Display
+        function showResultPage() {
+            // Get data from localStorage
+            const name = localStorage.getItem('userName') || 'Participant';
+            const regNo = localStorage.getItem('regNo') || 'N/A';
+            const year = localStorage.getItem('year') || 'N/A';
+            const score = localStorage.getItem('score') || '0';
+            const competitionType = localStorage.getItem('competitionType') || 'Quiz';
+            const disqualified = localStorage.getItem('disqualified') === 'true';
+            
+            // Update result page content
+            document.getElementById('result-name').textContent = name;
+            document.getElementById('result-regno').textContent = regNo;
+            document.getElementById('result-year').textContent = year;
+            document.getElementById('result-competition').textContent = competitionType;
+            document.getElementById('result-score').textContent = score;
+            
+            // Handle disqualification display
+            if (disqualified) {
+                document.getElementById('score-display').textContent = 'DISQUALIFIED';
+                document.getElementById('result-score').textContent = '0 (Disqualified for switching tabs)';
+                resultCard.classList.add('disqualified');
+            } else {
+                document.getElementById('score-display').textContent = `${score}/5`;
+                resultCard.classList.remove('disqualified');
+            }
+            
+            // Show result page
+            showPage(resultPage);
+            
+            // Show personalized message
+            setTimeout(() => {
+                if (disqualified) {
+                    alert(`You have been disqualified for switching tabs during the exam.`);
+                } else if (score >= 4) {
+                    alert(`Excellent performance, ${name}! You scored ${score}/5.`);
+                } else if (score >= 2) {
+                    alert(`Good effort, ${name}! You scored ${score}/5. Keep learning!`);
+                } else {
+                    alert(`${name}, you scored ${score}/5. Better luck next time!`);
+                }
+            }, 500);
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user is already registered
+            const isRegistered = localStorage.getItem('userName');
+            if (isRegistered) {
+                // For demo purposes, we'll keep the home page as default
+            }
+            
+            // Add hover effects to all buttons
+            const allButtons = document.querySelectorAll('.btn');
+            allButtons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    button.style.transform = 'translateY(-2px)';
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Initialize violation counter
+            violationCounter.textContent = "0";
+            
+            // Set up modal close functionality
+            document.querySelectorAll('.close-modal').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.closest('.modal').style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    if (button.id === 'close-beforeunload') {
+                        beforeunloadTriggered = false;
+                    }
+                });
+            });
+            
+            // Close modals when clicking outside content
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        if (modal.id === 'beforeunload-modal') {
+                            beforeunloadTriggered = false;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

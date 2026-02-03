@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Competition</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#1a1a2e,#16213e);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    background:#fff;
+    width:100%;
+    max-width:850px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.4);
+    animation:fadeIn 0.5s ease;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:10px;
+    color:#4a148c;
+}
+
+p{
+    text-align:center;
+    margin-bottom:25px;
+    color:#555;
+}
+
+/* Question */
+.question{
+    margin-bottom:25px;
+}
+
+.question p{
+    font-weight:600;
+    margin-bottom:10px;
+    text-align:left;
+    color:#2c3e50;
+}
+
+/* OPTIONS — FIXED STRUCTURE */
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+/* EACH OPTION ROW */
+.options label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    border-radius:8px;
+    background:#f7f7f7;
+    border:2px solid #e0e0e0;
+    cursor:pointer;
+    transition:0.3s;
+    width:100%;
+}
+
+/* Hover */
+.options label:hover{
+    background:#eef2ff;
+    border-color:#6a11cb;
+}
+
+/* Radio */
+.options input[type="radio"]{
+    transform:scale(1.2);
+    accent-color:#6a11cb;
+}
+
+/* Selected Option */
+.options label:has(input:checked){
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+    color:white;
+    border-color:#4a00e0;
+}
+
+/* Buttons */
+.btn{
+    display:block;
+    margin:30px auto 0;
+    padding:14px 35px;
+    font-size:1rem;
+    font-weight:600;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(45deg,#00b09b,#96c93d);
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 25px rgba(0,0,0,0.4);
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Quiz Competition</h2>
+<p>Answer all questions carefully. Good luck!</p>
+
+<form>
+
+<!-- QUESTION 1 -->
+<div class="question">
+<p>1. What is HTML?</p>
+<div class="options">
+<label><input type="radio" name="q1"> Programming Language</label>
+<label><input type="radio" name="q1"> Markup Language</label>
+<label><input type="radio" name="q1"> Operating System</label>
+<label><input type="radio" name="q1"> Database</label>
+</div>
+</div>
+
+<!-- QUESTION 2 -->
+<div class="question">
+<p>2. Which language is used for styling web pages?</p>
+<div class="options">
+<label><input type="radio" name="q2"> JavaScript</label>
+<label><input type="radio" name="q2"> CSS</label>
+<label><input type="radio" name="q2"> Python</label>
+<label><input type="radio" name="q2"> Java</label>
+</div>
+</div>
+
+<!-- QUESTION 3 -->
+<div class="question">
+<p>3. What does CSS stand for?</p>
+<div class="options">
+<label><input type="radio" name="q3"> Creative Style System</label>
+<label><input type="radio" name="q3"> Computer Style Sheets</label>
+<label><input type="radio" name="q3"> Cascading Style Sheets</label>
+<label><input type="radio" name="q3"> Colorful Style Sheets</label>
+</div>
+</div>
+
+<!-- QUESTION 4 -->
+<div class="question">
+<p>4. Which HTML tag is used to create a hyperlink?</p>
+<div class="options">
+<label><input type="radio" name="q4"> &lt;link&gt;</label>
+<label><input type="radio" name="q4"> &lt;a&gt;</label>
+<label><input type="radio" name="q4"> &lt;href&gt;</label>
+<label><input type="radio" name="q4"> &lt;url&gt;</label>
+</div>
+</div>
+
+<!-- QUESTION 5 -->
+<div class="question">
+<p>5. Which tag is used for a line break?</p>
+<div class="options">
+<label><input type="radio" name="q5"> &lt;br&gt;</label>
+<label><input type="radio" name="q5"> &lt;lb&gt;</label>
+<label><input type="radio" name="q5"> &lt;break&gt;</label>
+<label><input type="radio" name="q5"> &lt;newline&gt;</label>
+</div>
+</div>
+
+<button class="btn" type="submit">Submit Answers</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

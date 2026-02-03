@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Competition</title>
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    color: #333;
+}
+
+/* CONTAINER */
+.container {
+    width: 100%;
+    max-width: 800px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+    animation: fadeIn 0.5s ease;
+}
+
+/* HEADINGS */
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-align: center;
+    color: #4a148c;
+    margin-bottom: 15px;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* BUTTONS */
+.btn {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: #fff;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+
+.btn-back {
+    background: linear-gradient(45deg, #546e7a, #37474f);
+}
+
+/* FORMS */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: 600;
+}
+
+input, select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    font-size: 1rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #6a11cb;
+}
+
+/* QUIZ QUESTIONS */
+.question {
+    margin: 25px 0;
+}
+
+.question p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* OPTIONS – IMPROVED UI */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #f9f9f9;
+    transition: 0.25s;
+}
+
+.options label:hover {
+    background: #eef2ff;
+    border-color: #6a11cb;
+}
+
+.options input[type="radio"] {
+    transform: scale(1.2);
+    accent-color: #6a11cb;
+}
+
+/* Selected option */
+.options label:has(input:checked) {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border-color: #4a00e0;
+}
+
+/* RESULT */
+.result-card {
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.score {
+    font-size: 3rem;
+    text-align: center;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+/* NAV */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* HIDE */
+.hidden {
+    display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    .btn { width: 100%; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<div class="container" id="home">
+    <h1>Sourashtra College</h1>
+    <h2>Department of Computer Science</h2>
+    <p>Quiz & Debugging Competition</p>
+    <button class="btn" onclick="showPage('register')">Register Now</button>
+</div>
+
+<!-- REGISTER -->
+<div class="container hidden" id="register">
+    <h2>Registration</h2>
+    <form onsubmit="register(event)">
+        <label>Name</label>
+        <input id="name" required>
+
+        <label>Register No</label>
+        <input id="regno" required>
+
+        <label>Year</label>
+        <select id="year" required>
+            <option value="">Select</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+        </select>
+
+        <button class="btn">Submit</button>
+    </form>
+    <div class="nav">
+        <button class="btn btn-back" onclick="showPage('home')">Back</button>
+    </div>
+</div>
+
+<!-- QUIZ -->
+<div class="container hidden" id="quiz">
+    <h2>Quiz Competition</h2>
+
+    <form onsubmit="submitQuiz(event)">
+        <div class="question">
+            <p>1. What is HTML?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="0"><span>Programming Language</span></label>
+                <label><input type="radio" name="q1" value="1"><span>Markup Language</span></label>
+                <label><input type="radio" name="q1" value="0"><span>Operating System</span></label>
+                <label><input type="radio" name="q1" value="0"><span>Database</span></label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. Which language is used for styling web pages?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="0"><span>JavaScript</span></label>
+                <label><input type="radio" name="q2" value="1"><span>CSS</span></label>
+                <label><input type="radio" name="q2" value="0"><span>Python</span></label>
+                <label><input type="radio" name="q2" value="0"><span>Java</span></label>
+            </div>
+        </div>
+
+        <button class="btn">Submit Quiz</button>
+    </form>
+</div>
+
+<!-- RESULT -->
+<div class="container hidden" id="result">
+    <h2>Result</h2>
+    <div class="result-card">
+        <p>Name: <span id="rname"></span></p>
+        <p>Register No: <span id="rreg"></span></p>
+        <div class="score" id="rscore"></div>
+    </div>
+    <div class="nav">
+        <button class="btn" onclick="showPage('quiz')">Retry</button>
+        <button class="btn btn-back" onclick="showPage('home')">Home</button>
+    </div>
+</div>
+
+<script>
+function showPage(id) {
+    document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+}
+
+function register(e) {
+    e.preventDefault();
+    localStorage.name = name.value;
+    localStorage.regno = regno.value;
+    showPage('quiz');
+}
+
+function submitQuiz(e) {
+    e.preventDefault();
+    let score = 0;
+    if (document.querySelector('input[name="q1"]:checked')?.value == 1) score++;
+    if (document.querySelector('input[name="q2"]:checked')?.value == 1) score++;
+
+    rname.textContent = localStorage.name;
+    rreg.textContent = localStorage.regno;
+    rscore.textContent = score + "/2";
+
+    showPage('result');
+}
+</script>
+
+</body>
+</html>
