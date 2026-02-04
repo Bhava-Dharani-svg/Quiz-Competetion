@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sourashtra College Competition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      --secondary-gradient: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+      --error-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+      --success-gradient: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+      --dark-bg: #0f0f1b;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.25);
+      --transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: var(--dark-bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(106, 17, 203, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 90% 80%, rgba(37, 117, 252, 0.1) 0%, transparent 25%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      background: var(--card-bg);
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(245,247,250,0.95));
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      text-align: center;
+      z-index: 10;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--primary-gradient);
+      z-index: 20;
+    }
+
+    .container:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+    }
+
+    h1 {
+      font-family: 'Montserrat', 'Times New Roman', serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin: 25px 0 20px;
+      color: #2c3e50;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 4px;
+      background: var(--primary-gradient);
+      border-radius: 2px;
+    }
+
+    p {
+      margin: 18px 0;
+      font-size: 1.15rem;
+      color: #555;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .subtitle {
+      color: #7f8c8d;
+      font-size: 1.3rem;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* Button Styles */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      padding: 16px 42px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      border-radius: 60px;
+      cursor: pointer;
+      margin: 15px 12px;
+      transition: var(--transition);
+      box-shadow: 0 6px 20px rgba(37, 117, 252, 0.35);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      min-width: 220px;
+      z-index: 1;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.15);
+      z-index: -1;
+      transform: translateX(-100%);
+      transition: var(--transition);
+    }
+
+    .btn:hover::before {
+      transform: translateX(0);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(37, 117, 252, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
+    }
+
+    .btn-quiz {
+      background: linear-gradient(135deg, #9d50ff 0%, #6e00ff 100%);
+      box-shadow: 0 6px 20px rgba(110, 0, 255, 0.35);
+    }
+
+    .btn-quiz:hover {
+      box-shadow: 0 10px 28px rgba(110, 0, 255, 0.5);
+    }
+
+    .btn-debug {
+      background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+      color: #0a3d4d;
+      box-shadow: 0 6px 20px rgba(0, 201, 255, 0.3);
+    }
+
+    .btn-debug:hover {
+      box-shadow: 0 10px 28px rgba(0, 201, 255, 0.45);
+    }
+
+    .btn-register {
+      background: var(--error-gradient);
+      box-shadow: 0 6px 20px rgba(255, 75, 43, 0.35);
+    }
+
+    .btn-register:hover {
+      box-shadow: 0 10px 28px rgba(255, 75, 43, 0.5);
+    }
+
+    .btn-submit {
+      background: var(--success-gradient);
+      box-shadow: 0 6px 20px rgba(0, 176, 155, 0.35);
+      min-width: 260px;
+      margin-top: 25px;
+    }
+
+    .btn-submit:hover {
+      box-shadow: 0 10px 28px rgba(0, 176, 155, 0.5);
+    }
+
+    .btn-back {
+      background: linear-gradient(135deg, #546e7a 0%, #455a64 100%);
+      box-shadow: 0 6px 20px rgba(69, 90, 100, 0.3);
+      min-width: 200px;
+    }
+
+    .btn-back:hover {
+      box-shadow: 0 10px 28px rgba(69, 90, 100, 0.45);
+    }
+
+    .btn-fullscreen {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      color: #8b0000;
+      box-shadow: 0 6px 20px rgba(255, 154, 158, 0.35);
+      min-width: 280px;
+    }
+
+    .btn-fullscreen:hover {
+      box-shadow: 0 10px 28px rgba(255, 154, 158, 0.5);
+    }
+
+    .btn i {
+      margin-right: 8px;
+      font-size: 1.2em;
+    }
+
+    /* Form Styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      margin-top: 25px;
+      width: 100%;
+    }
+
+    .form-group {
+      width: 100%;
+      max-width: 480px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #2c3e50;
+      font-size: 1.1rem;
+      letter-spacing: 0.3px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid #e1e5eb;
+      border-radius: 16px;
+      font-size: 1.05rem;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+      background: #f8f9fc;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #6a11cb;
+      box-shadow: 0 0 0 4px rgba(106, 17, 203, 0.15);
+      background: white;
+    }
+
+    input::placeholder {
+      color: #aab3c1;
+    }
+
+    /* Competition Page Styles */
+    .competition-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      padding: 10px;
+    }
+
+    .competition-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 25px;
+      width: 100%;
+    }
+
+    /* Quiz Page Styles */
+    .violation-counter {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      background: rgba(255, 75, 75, 0.95);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      z-index: 2000;
+      animation: bounce 0.6s;
+      border: 4px solid white;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+
+    .warning-banner {
+      background: var(--error-gradient);
+      color: white;
+      padding: 20px;
+      border-radius: 16px;
+      margin: 25px 0 15px;
+      font-weight: 600;
+      font-size: 1.25rem;
+      box-shadow: 0 8px 25px rgba(255, 75, 43, 0.4);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .warning-banner::before {
+      content: "⚠️";
+      margin-right: 12px;
+      font-size: 1.8em;
+      vertical-align: middle;
+    }
+
+    .monitoring-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 20px 0;
+      font-weight: 600;
+      color: #e74c3c;
+      font-size: 1.2rem;
+      background: rgba(255, 243, 205, 0.6);
+      padding: 14px;
+      border-radius: 14px;
+      border-left: 4px solid #ffc107;
+    }
+
+    .status-dot {
+      width: 16px;
+      height: 16px;
+      background: #e74c3c;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.3); }
+    }
+
+    .fullscreen-warning {
+      background: #e3f2fd;
+      border-left: 5px solid #2196f3;
+      padding: 18px 25px;
+      margin: 25px 0;
+      border-radius: 0 14px 14px 0;
+      text-align: left;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: #0d47a1;
+      box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+    }
+
+    .question-container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 35px;
+      text-align: left;
+    }
+
+    .question-number {
+      display: inline-block;
+      background: var(--primary-gradient);
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-right: 15px;
+    }
+
+    .question-text {
+      font-weight: 700;
+      margin-bottom: 22px;
+      color: #1a2530;
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .option-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px; /* ⬅️ reduced from 14px */
+  padding: 18px 22px;
+}
+
+.option-input {
+  margin-top: 2px; /* ⬅️ tighter vertical alignment */
+  transform: scale(1.15); /* ⬅️ slightly smaller radio */
+}
+
+
+    .option-label:hover {
+      background: #eef5ff;
+      border-color: #a7b8ff;
+      transform: translateX(5px);
+    }
+
+    .option-label::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: var(--primary-gradient);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .option-label:hover::before {
+      opacity: 1;
+    }
+
+  
+
+    .option-text {
+  font-size: 1.15rem;
+  color: #2d3748;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.option-label:has(.option-input:checked) {
+  background: var(--primary-gradient);
+  border-color: transparent;
+}
+
+.option-label:has(.option-input:checked) .option-text {
+  color: white;
+  font-weight: 600;
+}
+    /* Result Page Styles */
+    .result-card {
+      background: var(--secondary-gradient);
+      color: white;
+      padding: 40px;
+      border-radius: 24px;
+      margin-top: 30px;
+      box-shadow: var(--shadow-lg);
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .result-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+      z-index: 0;
+    }
+
+    .result-card-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-card p {
+      font-size: 1.4rem;
+      margin: 16px 0;
+      text-align: center;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .result-card span {
+      font-weight: 700;
+      color: #ffd700;
+      display: block;
+      margin-top: 5px;
+      font-size: 1.5rem;
+    }
+
+    .score-display {
+      font-size: 4.8rem;
+      font-weight: 800;
+      text-align: center;
+      margin: 25px 0 15px;
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      font-family: 'Montserrat', serif;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .score-label {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .disqualified {
+      background: var(--error-gradient) !important;
+    }
+
+    .disqualified .score-display {
+      background: linear-gradient(45deg, #ffffff, #e0e0e0) !important;
+      color: #b71c1c !important;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3) !important;
+      font-size: 3.5rem !important;
+    }
+
+    .disqualified .score-label {
+      color: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    /* Navigation */
+    .nav-btns {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      max-width: 650px;
+      margin-top: 35px;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    /* Overlay for disqualification */
+    .disqualification-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 15, 27, 0.97);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      color: white;
+      text-align: center;
+      padding: 40px;
+      display: none;
+    }
+
+    .disqualification-overlay h2 {
+      font-size: 4.5rem;
+      margin-bottom: 25px;
+      background: var(--error-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+      font-family: 'Montserrat', serif;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .disqualification-overlay p {
+      font-size: 2.1rem;
+      max-width: 850px;
+      margin-bottom: 40px;
+      line-height: 1.55;
+      color: #e0e0ff;
+      font-weight: 500;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 7, 20, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 45px;
+      border-radius: 28px;
+      max-width: 600px;
+      width: 95%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+      position: relative;
+      animation: modalFadeIn 0.5s ease-out;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal h3 {
+      color: #e74c3c;
+      margin-bottom: 25px;
+      font-size: 2.3rem;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .modal h3::before {
+      content: "⚠️";
+      font-size: 2.5rem;
+    }
+
+    .modal p {
+      margin: 20px 0;
+      font-size: 1.25rem;
+      line-height: 1.65;
+      color: #4a5568;
+    }
+
+    .modal strong {
+      color: #2c3e50;
+      font-weight: 700;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 35px;
+      flex-wrap: wrap;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      font-size: 2.2rem;
+      background: none;
+      border: none;
+      color: #7f8c8d;
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 300;
+    }
+
+    .close-modal:hover {
+      background: #f5f7fa;
+      color: #e74c3c;
+      transform: rotate(90deg);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      animation: fadeIn 0.7s ease-out forwards;
+    }
+
+    .btn {
+      animation: fadeIn 0.7s ease-out 0.2s forwards;
+      animation-fill-mode: backwards;
+    }
+
+    .question-container {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .question-container:nth-child(2) { animation-delay: 0.1s; }
+    .question-container:nth-child(3) { animation-delay: 0.2s; }
+    .question-container:nth-child(4) { animation-delay: 0.3s; }
+    .question-container:nth-child(5) { animation-delay: 0.4s; }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 25px;
+        margin: 15px;
+        border-radius: 22px;
+      }
+      
+      h1 {
+        font-size: 2.6rem;
+      }
+      
+      h2 {
+        font-size: 2.1rem;
+      }
+      
+      p {
+        font-size: 1.05rem;
+      }
+      
+      .btn {
+        padding: 15px 35px;
+        font-size: 1.05rem;
+        min-width: 190px;
+        margin: 12px 8px;
+      }
+      
+      .competition-btns {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .nav-btns {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .options {
+        gap: 15px;
+      }
+      
+      .option-label {
+        padding: 18px 20px;
+        border-radius: 16px;
+      }
+      
+      .question-text {
+        font-size: 1.3rem;
+      }
+      
+      .score-display {
+        font-size: 4rem;
+      }
+      
+      .violation-counter {
+        width: 45px;
+        height: 45px;
+        font-size: 1.4rem;
+        top: 18px;
+        right: 18px;
+      }
+      
+      .modal-content {
+        padding: 35px 25px;
+      }
+      
+      .disqualification-overlay h2 {
+        font-size: 3.6rem;
+      }
+      
+      .disqualification-overlay p {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px 20px;
+        border-radius: 20px;
+      }
+      
+      h1 {
+        font-size: 2.3rem;
+      }
+      
+      h2 {
+        font-size: 1.9rem;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 320px;
+        padding: 16px;
+        font-size: 1.1rem;
+        margin: 10px auto;
+      }
+      
+      .nav-btns {
+        flex-direction: column;
+      }
+      
+      .options {
+        gap: 14px;
+      }
+      
+      .option-label {
+        padding: 16px;
+        font-size: 1.05rem;
+      }
+      
+      .question-text {
+        font-size: 1.25rem;
+      }
+      
+      .score-display {
+        font-size: 3.6rem;
+      }
+      
+      .result-card p {
+        font-size: 1.3rem;
+      }
+      
+      .result-card span {
+        font-size: 1.4rem;
+      }
+      
+      .violation-counter {
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
+      }
+      
+      .monitoring-status {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 1.1rem;
+        padding: 12px;
+      }
+      
+      .disqualification-overlay h2 {
+        font-size: 3.2rem;
+      }
+      
+      .disqualification-overlay p {
+        font-size: 1.65rem;
+      }
+      
+      .modal h3 {
+        font-size: 2rem;
+      }
+      
+      .modal p {
+        font-size: 1.15rem;
+      }
+    }
+
+    /* Fullscreen styles */
+    body.fullscreen {
+      background: #0a0a15;
+      padding: 0;
+    }
+    
+    body.fullscreen .container {
+      max-width: 95%;
+      margin: 25px auto;
+      border-radius: 20px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.45);
+    }
+    
+    body.fullscreen .nav-btns {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    body.fullscreen .btn-back {
+      background: var(--error-gradient);
+    }
+    
+    /* Badge for department */
+    .dept-badge {
+      display: inline-block;
+      background: rgba(106, 17, 203, 0.12);
+      color: #6a11cb;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      margin-top: 8px;
+      font-size: 1.25rem;
+      letter-spacing: 0.8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Home Page Content -->
+  <div class="container" id="home-page">
+    <h1>Sourashtra College (Autonomous)</h1>
+    <div class="dept-badge">Department of Computer Science</div>
+    <div class="subtitle">Charles Babbage Association</div>
+    <p>Test your skills in Quiz and Debugging competitions</p>
+    <p>Showcase your talent and win exciting prizes!</p>
+    <button class="btn btn-register" id="register-btn">
+      <i>✨</i> Register Now
+    </button>
+  </div>
+
+  <!-- Competition Selection Page (Hidden Initially) -->
+  <div class="container" id="competition-page" style="display: none;">
+    <h2>Select Competition</h2>
+    <p>Choose the competition you want to participate in:</p>
+    <div class="competition-btns">
+      <button class="btn btn-quiz" id="quiz-btn">
+        <i>🧠</i> Quiz Competition
+      </button>
+      <button class="btn btn-debug" id="debug-btn">
+        <i>🐞</i> Debugging Challenge
+      </button>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-back" id="back-home">← Back to Home</button>
+    </div>
+  </div>
+
+  <!-- Registration Page (Hidden Initially) -->
+  <div class="container" id="registration-page" style="display: none;">
+    <h2>Registration Form</h2>
+    <form id="regForm">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+      </div>
+      <div class="form-group">
+        <label for="regno">Registration Number</label>
+        <input type="text" id="regno" name="regno" required placeholder="Enter your registration number">
+      </div>
+      <div class="form-group">
+        <label for="year">Academic Year</label>
+        <select id="year" name="year" required>
+          <option value="" disabled selected>Select your year</option>
+          <option>1st Year</option>
+          <option>2nd Year</option>
+          <option>3rd Year</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-submit">Submit Registration</button>
+    </form>
+    <div class="nav-btns">
+      <button class="btn btn-back" id="back-home-reg">← Back to Home</button>
+    </div>
+  </div>
+
+  <!-- Quiz Page (Hidden Initially) -->
+  <div class="container" id="quiz-page" style="display: none;">
+    <div class="violation-counter" id="violation-counter">0</div>
+    <div class="warning-banner">
+      EXAM MODE: Switching tabs or leaving this window will result in disqualification
+    </div>
+    <div class="monitoring-status">
+      <div class="status-dot"></div>
+      <span>Exam monitoring active - Do not switch tabs or minimize window</span>
+    </div>
+    <div class="fullscreen-warning">
+      For best experience and to prevent accidental tab switches, click the "Enter Fullscreen Mode" button below.
+    </div>
+    <h2>Quiz Competition</h2>
+    <p>Answer all 25 questions carefully. Good luck!</p>
+    
+    <form id="quizForm">
+
+<!-- C PROGRAMMING -->
+<div class="question-container">
+  <div class="question-text"><span class="question-number">1</span> What will be the output?</div>
+  <p>int x = 5;<br>printf("%d %d %d", x++, ++x, x++);</p>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q1" value="0" class="option-input"><span class="option-text">5 7 7</span></label>
+    <label class="option-label"><input type="radio" name="q1" value="0" class="option-input"><span class="option-text">5 6 7</span></label>
+    <label class="option-label"><input type="radio" name="q1" value="1" class="option-input"><span class="option-text">Undefined behavior</span></label>
+    <label class="option-label"><input type="radio" name="q1" value="0" class="option-input"><span class="option-text">6 7 8</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">2</span> Which of the following is TRUE about malloc()?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q2" value="0" class="option-input"><span class="option-text">Initializes memory</span></label>
+    <label class="option-label"><input type="radio" name="q2" value="0" class="option-input"><span class="option-text">Allocates memory at compile time</span></label>
+    <label class="option-label"><input type="radio" name="q2" value="1" class="option-input"><span class="option-text">Returns void*</span></label>
+    <label class="option-label"><input type="radio" name="q2" value="0" class="option-input"><span class="option-text">Allocates memory on stack</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">3</span> What does sizeof('A') return in C?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q3" value="0" class="option-input"><span class="option-text">1</span></label>
+    <label class="option-label"><input type="radio" name="q3" value="0" class="option-input"><span class="option-text">2</span></label>
+    <label class="option-label"><input type="radio" name="q3" value="1" class="option-input"><span class="option-text">4</span></label>
+    <label class="option-label"><input type="radio" name="q3" value="0" class="option-input"><span class="option-text">Depends on compiler</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">4</span> Which function is unsafe and can cause buffer overflow?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q4" value="0" class="option-input"><span class="option-text">fgets()</span></label>
+    <label class="option-label"><input type="radio" name="q4" value="0" class="option-input"><span class="option-text">scanf()</span></label>
+    <label class="option-label"><input type="radio" name="q4" value="1" class="option-input"><span class="option-text">gets()</span></label>
+    <label class="option-label"><input type="radio" name="q4" value="0" class="option-input"><span class="option-text">puts()</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">5</span> What is the output?</div>
+  <p>printf("%d", printf("Hello"));</p>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q5" value="1" class="option-input"><span class="option-text">Hello5</span></label>
+    <label class="option-label"><input type="radio" name="q5" value="0" class="option-input"><span class="option-text">Hello4</span></label>
+    <label class="option-label"><input type="radio" name="q5" value="0" class="option-input"><span class="option-text">Error</span></label>
+    <label class="option-label"><input type="radio" name="q5" value="0" class="option-input"><span class="option-text">Hello</span></label>
+  </div>
+</div>
+
+<!-- C++ -->
+<div class="question-container">
+  <div class="question-text"><span class="question-number">6</span> Which concept allows same function name with different parameters?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q6" value="0" class="option-input"><span class="option-text">Overriding</span></label>
+    <label class="option-label"><input type="radio" name="q6" value="0" class="option-input"><span class="option-text">Encapsulation</span></label>
+    <label class="option-label"><input type="radio" name="q6" value="0" class="option-input"><span class="option-text">Polymorphism</span></label>
+    <label class="option-label"><input type="radio" name="q6" value="1" class="option-input"><span class="option-text">Overloading</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">7</span> What is the output? cout &lt;&lt; (5 &lt; 3 &lt; 2);</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q7" value="0" class="option-input"><span class="option-text">0</span></label>
+    <label class="option-label"><input type="radio" name="q7" value="1" class="option-input"><span class="option-text">1</span></label>
+    <label class="option-label"><input type="radio" name="q7" value="0" class="option-input"><span class="option-text">Error</span></label>
+    <label class="option-label"><input type="radio" name="q7" value="0" class="option-input"><span class="option-text">Undefined</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">8</span> Which of the following cannot be virtual?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q8" value="0" class="option-input"><span class="option-text">Destructor</span></label>
+    <label class="option-label"><input type="radio" name="q8" value="1" class="option-input"><span class="option-text">Constructor</span></label>
+    <label class="option-label"><input type="radio" name="q8" value="0" class="option-input"><span class="option-text">Function</span></label>
+    <label class="option-label"><input type="radio" name="q8" value="0" class="option-input"><span class="option-text">Method</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">9</span> Base class pointer to derived object without virtual functions?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q9" value="0" class="option-input"><span class="option-text">Runtime polymorphism</span></label>
+    <label class="option-label"><input type="radio" name="q9" value="1" class="option-input"><span class="option-text">Compile-time binding</span></label>
+    <label class="option-label"><input type="radio" name="q9" value="0" class="option-input"><span class="option-text">Error</span></label>
+    <label class="option-label"><input type="radio" name="q9" value="0" class="option-input"><span class="option-text">Overloading</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">10</span> Which operator cannot be overloaded?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q10" value="0" class="option-input"><span class="option-text">+</span></label>
+    <label class="option-label"><input type="radio" name="q10" value="0" class="option-input"><span class="option-text">[]</span></label>
+    <label class="option-label"><input type="radio" name="q10" value="1" class="option-input"><span class="option-text">::</span></label>
+    <label class="option-label"><input type="radio" name="q10" value="0" class="option-input"><span class="option-text">&lt;&lt;</span></label>
+  </div>
+</div>
+
+<!-- JAVA -->
+<div class="question-container">
+  <div class="question-text"><span class="question-number">11</span> Output of: System.out.println(10 + 20 + "30");</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q11" value="0" class="option-input"><span class="option-text">102030</span></label>
+    <label class="option-label"><input type="radio" name="q11" value="1" class="option-input"><span class="option-text">3030</span></label>
+    <label class="option-label"><input type="radio" name="q11" value="0" class="option-input"><span class="option-text">303</span></label>
+    <label class="option-label"><input type="radio" name="q11" value="0" class="option-input"><span class="option-text">30</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">12</span> Which keyword prevents inheritance?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q12" value="0" class="option-input"><span class="option-text">static</span></label>
+    <label class="option-label"><input type="radio" name="q12" value="1" class="option-input"><span class="option-text">final</span></label>
+    <label class="option-label"><input type="radio" name="q12" value="0" class="option-input"><span class="option-text">private</span></label>
+    <label class="option-label"><input type="radio" name="q12" value="0" class="option-input"><span class="option-text">protected</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">13</span> Can we override a static method?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q13" value="0" class="option-input"><span class="option-text">Yes</span></label>
+    <label class="option-label"><input type="radio" name="q13" value="1" class="option-input"><span class="option-text">No</span></label>
+    <label class="option-label"><input type="radio" name="q13" value="0" class="option-input"><span class="option-text">Only in abstract class</span></label>
+    <label class="option-label"><input type="radio" name="q13" value="0" class="option-input"><span class="option-text">Depends</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">14</span> Default value of instance variables in Java?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q14" value="0" class="option-input"><span class="option-text">Garbage</span></label>
+    <label class="option-label"><input type="radio" name="q14" value="0" class="option-input"><span class="option-text">Null</span></label>
+    <label class="option-label"><input type="radio" name="q14" value="0" class="option-input"><span class="option-text">Zero</span></label>
+    <label class="option-label"><input type="radio" name="q14" value="1" class="option-input"><span class="option-text">Depends on datatype</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">15</span> Which exception is unchecked?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q15" value="0" class="option-input"><span class="option-text">IOException</span></label>
+    <label class="option-label"><input type="radio" name="q15" value="0" class="option-input"><span class="option-text">SQLException</span></label>
+    <label class="option-label"><input type="radio" name="q15" value="1" class="option-input"><span class="option-text">NullPointerException</span></label>
+    <label class="option-label"><input type="radio" name="q15" value="0" class="option-input"><span class="option-text">FileNotFoundException</span></label>
+  </div>
+</div>
+
+<!-- PYTHON -->
+<div class="question-container">
+  <div class="question-text"><span class="question-number">16</span> print(type([]) is list)</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q16" value="1" class="option-input"><span class="option-text">True</span></label>
+    <label class="option-label"><input type="radio" name="q16" value="0" class="option-input"><span class="option-text">False</span></label>
+    <label class="option-label"><input type="radio" name="q16" value="0" class="option-input"><span class="option-text">Error</span></label>
+    <label class="option-label"><input type="radio" name="q16" value="0" class="option-input"><span class="option-text">None</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">17</span> What is the output?
+a = [1,2,3]
+b = a
+b.append(4)
+print(a)
+</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q17" value="0" class="option-input"><span class="option-text">[1,2,3]</span></label>
+    <label class="option-label"><input type="radio" name="q17" value="0" class="option-input"><span class="option-text">[4]</span></label>
+    <label class="option-label"><input type="radio" name="q17" value="0" class="option-input"><span class="option-text">Error</span></label>
+    <label class="option-label"><input type="radio" name="q17" value="1" class="option-input"><span class="option-text">[1,2,3,4]</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">18</span> Which is immutable?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q18" value="0" class="option-input"><span class="option-text">list</span></label>
+    <label class="option-label"><input type="radio" name="q18" value="0" class="option-input"><span class="option-text">dict</span></label>
+    <label class="option-label"><input type="radio" name="q18" value="0" class="option-input"><span class="option-text">set</span></label>
+    <label class="option-label"><input type="radio" name="q18" value="1" class="option-input"><span class="option-text">tuple</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">19</span> What does *args represent?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q19" value="0" class="option-input"><span class="option-text">Keyword arguments</span></label>
+    <label class="option-label"><input type="radio" name="q19" value="0" class="option-input"><span class="option-text">List</span></label>
+    <label class="option-label"><input type="radio" name="q19" value="1" class="option-input"><span class="option-text">Variable-length arguments</span></label>
+    <label class="option-label"><input type="radio" name="q19" value="0" class="option-input"><span class="option-text">Dictionary</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">20</span> print(0.1 + 0.2 == 0.3)</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q20" value="0" class="option-input"><span class="option-text">True</span></label>
+    <label class="option-label"><input type="radio" name="q20" value="1" class="option-input"><span class="option-text">False</span></label>
+    <label class="option-label"><input type="radio" name="q20" value="0" class="option-input"><span class="option-text">Error</span></label>
+    <label class="option-label"><input type="radio" name="q20" value="0" class="option-input"><span class="option-text">None</span></label>
+  </div>
+</div>
+
+<!-- GENERAL -->
+<div class="question-container">
+  <div class="question-text"><span class="question-number">21</span> Currency of Britain?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q21" value="0" class="option-input"><span class="option-text">USD</span></label>
+    <label class="option-label"><input type="radio" name="q21" value="1" class="option-input"><span class="option-text">GBP</span></label>
+    <label class="option-label"><input type="radio" name="q21" value="0" class="option-input"><span class="option-text">JPY</span></label>
+    <label class="option-label"><input type="radio" name="q21" value="0" class="option-input"><span class="option-text">INR</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">22</span> Google Pay was created in?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q22" value="0" class="option-input"><span class="option-text">India</span></label>
+    <label class="option-label"><input type="radio" name="q22" value="1" class="option-input"><span class="option-text">USA</span></label>
+    <label class="option-label"><input type="radio" name="q22" value="0" class="option-input"><span class="option-text">France</span></label>
+    <label class="option-label"><input type="radio" name="q22" value="0" class="option-input"><span class="option-text">England</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">23</span> Fundamental Right in India?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q23" value="0" class="option-input"><span class="option-text">Right to Property</span></label>
+    <label class="option-label"><input type="radio" name="q23" value="1" class="option-input"><span class="option-text">Right to Education</span></label>
+    <label class="option-label"><input type="radio" name="q23" value="0" class="option-input"><span class="option-text">Right to Job</span></label>
+    <label class="option-label"><input type="radio" name="q23" value="0" class="option-input"><span class="option-text">Right to Internet</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">24</span> PDF stands for?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q24" value="0" class="option-input"><span class="option-text">Printed Document File</span></label>
+    <label class="option-label"><input type="radio" name="q24" value="0" class="option-input"><span class="option-text">Portable Data File</span></label>
+    <label class="option-label"><input type="radio" name="q24" value="1" class="option-input"><span class="option-text">Portable Document Format</span></label>
+    <label class="option-label"><input type="radio" name="q24" value="0" class="option-input"><span class="option-text">Public Document Form</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">25 </span> Ctrl + Z is used for?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q25" value="0" class="option-input"><span class="option-text">Redo</span></label>
+    <label class="option-label"><input type="radio" name="q25" value="0" class="option-input"><span class="option-text">Save</span></label>
+    <label class="option-label"><input type="radio" name="q25" value="1" class="option-input"><span class="option-text">Undo</span></label>
+    <label class="option-label"><input type="radio" name="q25" value="0" class="option-input"><span class="option-text">Cut</span></label>
+  </div>
+</div>
+
+<!-- GENERAL KNOWLEDGE – SET 2 -->
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">26</span> What is the full form of GPT?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q26" value="0" class="option-input"><span class="option-text">General Processing Tool</span></label>
+    <label class="option-label"><input type="radio" name="q26" value="1" class="option-input"><span class="option-text">Generative Pre-trained Transformer</span></label>
+    <label class="option-label"><input type="radio" name="q26" value="0" class="option-input"><span class="option-text">Global Programming Technique</span></label>
+    <label class="option-label"><input type="radio" name="q26" value="0" class="option-input"><span class="option-text">General Purpose Transformer</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">27</span> ChatGPT is developed by which organization?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q27" value="0" class="option-input"><span class="option-text">Google</span></label>
+    <label class="option-label"><input type="radio" name="q27" value="0" class="option-input"><span class="option-text">Microsoft</span></label>
+    <label class="option-label"><input type="radio" name="q27" value="1" class="option-input"><span class="option-text">OpenAI</span></label>
+    <label class="option-label"><input type="radio" name="q27" value="0" class="option-input"><span class="option-text">Meta</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">28</span> Perplexity AI mainly relies on which cloud service?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q28" value="0" class="option-input"><span class="option-text">Google Cloud</span></label>
+    <label class="option-label"><input type="radio" name="q28" value="0" class="option-input"><span class="option-text">AWS</span></label>
+    <label class="option-label"><input type="radio" name="q28" value="1" class="option-input"><span class="option-text">Microsoft Azure</span></label>
+    <label class="option-label"><input type="radio" name="q28" value="0" class="option-input"><span class="option-text">Oracle Cloud</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">29</span> Who is the CEO of Amazon?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q29" value="0" class="option-input"><span class="option-text">Jeff Bezos</span></label>
+    <label class="option-label"><input type="radio" name="q29" value="1" class="option-input"><span class="option-text">Andy Jassy</span></label>
+    <label class="option-label"><input type="radio" name="q29" value="0" class="option-input"><span class="option-text">Sundar Pichai</span></label>
+    <label class="option-label"><input type="radio" name="q29" value="0" class="option-input"><span class="option-text">Satya Nadella</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">30</span> Alibaba is a company from which country?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q30" value="0" class="option-input"><span class="option-text">Japan</span></label>
+    <label class="option-label"><input type="radio" name="q30" value="0" class="option-input"><span class="option-text">South Korea</span></label>
+    <label class="option-label"><input type="radio" name="q30" value="1" class="option-input"><span class="option-text">China</span></label>
+    <label class="option-label"><input type="radio" name="q30" value="0" class="option-input"><span class="option-text">Singapore</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">31</span> Who founded Alibaba Group?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q31" value="0" class="option-input"><span class="option-text">Pony Ma</span></label>
+    <label class="option-label"><input type="radio" name="q31" value="1" class="option-input"><span class="option-text">Jack Ma</span></label>
+    <label class="option-label"><input type="radio" name="q31" value="0" class="option-input"><span class="option-text">Lei Jun</span></label>
+    <label class="option-label"><input type="radio" name="q31" value="0" class="option-input"><span class="option-text">Zhang Yiming</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">32</span> Google’s parent company is called:</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q32" value="0" class="option-input"><span class="option-text">Meta</span></label>
+    <label class="option-label"><input type="radio" name="q32" value="1" class="option-input"><span class="option-text">Alphabet</span></label>
+    <label class="option-label"><input type="radio" name="q32" value="0" class="option-input"><span class="option-text">Amazon Inc</span></label>
+    <label class="option-label"><input type="radio" name="q32" value="0" class="option-input"><span class="option-text">OpenAI</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">33</span> Apple Park is the headquarters of:</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q33" value="0" class="option-input"><span class="option-text">Google</span></label>
+    <label class="option-label"><input type="radio" name="q33" value="1" class="option-input"><span class="option-text">Apple</span></label>
+    <label class="option-label"><input type="radio" name="q33" value="0" class="option-input"><span class="option-text">Amazon</span></label>
+    <label class="option-label"><input type="radio" name="q33" value="0" class="option-input"><span class="option-text">Meta</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">34</span> Amazon headquarters is located in:</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q34" value="0" class="option-input"><span class="option-text">New York</span></label>
+    <label class="option-label"><input type="radio" name="q34" value="1" class="option-input"><span class="option-text">Seattle</span></label>
+    <label class="option-label"><input type="radio" name="q34" value="0" class="option-input"><span class="option-text">California</span></label>
+    <label class="option-label"><input type="radio" name="q34" value="0" class="option-input"><span class="option-text">Texas</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">35</span> Microsoft headquarters is located in:</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q35" value="0" class="option-input"><span class="option-text">California</span></label>
+    <label class="option-label"><input type="radio" name="q35" value="0" class="option-input"><span class="option-text">New York</span></label>
+    <label class="option-label"><input type="radio" name="q35" value="1" class="option-input"><span class="option-text">Washington</span></label>
+    <label class="option-label"><input type="radio" name="q35" value="0" class="option-input"><span class="option-text">Texas</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">36</span> What does SaaS stand for?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q36" value="1" class="option-input"><span class="option-text">Software as a Service</span></label>
+    <label class="option-label"><input type="radio" name="q36" value="0" class="option-input"><span class="option-text">System as a Software</span></label>
+    <label class="option-label"><input type="radio" name="q36" value="0" class="option-input"><span class="option-text">Storage as a Service</span></label>
+    <label class="option-label"><input type="radio" name="q36" value="0" class="option-input"><span class="option-text">Software and System</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">37</span> Which company owns Instagram?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q37" value="0" class="option-input"><span class="option-text">Google</span></label>
+    <label class="option-label"><input type="radio" name="q37" value="1" class="option-input"><span class="option-text">Meta</span></label>
+    <label class="option-label"><input type="radio" name="q37" value="0" class="option-input"><span class="option-text">Amazon</span></label>
+    <label class="option-label"><input type="radio" name="q37" value="0" class="option-input"><span class="option-text">Microsoft</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">38</span> Which search engine focuses on privacy?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q38" value="0" class="option-input"><span class="option-text">Google</span></label>
+    <label class="option-label"><input type="radio" name="q38" value="0" class="option-input"><span class="option-text">Bing</span></label>
+    <label class="option-label"><input type="radio" name="q38" value="1" class="option-input"><span class="option-text">DuckDuckGo</span></label>
+    <label class="option-label"><input type="radio" name="q38" value="0" class="option-input"><span class="option-text">Yahoo</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">39</span> UPI was launched in which year?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q39" value="0" class="option-input"><span class="option-text">2014</span></label>
+    <label class="option-label"><input type="radio" name="q39" value="0" class="option-input"><span class="option-text">2015</span></label>
+    <label class="option-label"><input type="radio" name="q39" value="1" class="option-input"><span class="option-text">2016</span></label>
+    <label class="option-label"><input type="radio" name="q39" value="0" class="option-input"><span class="option-text">2017</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">40</span> Which company owns PhonePe?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q40" value="0" class="option-input"><span class="option-text">Amazon</span></label>
+    <label class="option-label"><input type="radio" name="q40" value="1" class="option-input"><span class="option-text">Walmart</span></label>
+    <label class="option-label"><input type="radio" name="q40" value="0" class="option-input"><span class="option-text">Flipkart</span></label>
+    <label class="option-label"><input type="radio" name="q40" value="0" class="option-input"><span class="option-text">Google</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">41</span> WWW stands for:</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q41" value="0" class="option-input"><span class="option-text">World Web Wide</span></label>
+    <label class="option-label"><input type="radio" name="q41" value="1" class="option-input"><span class="option-text">World Wide Web</span></label>
+    <label class="option-label"><input type="radio" name="q41" value="0" class="option-input"><span class="option-text">Web World Wide</span></label>
+    <label class="option-label"><input type="radio" name="q41" value="0" class="option-input"><span class="option-text">World Web Window</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">42</span> Tesla is a company from which country?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q42" value="0" class="option-input"><span class="option-text">Germany</span></label>
+    <label class="option-label"><input type="radio" name="q42" value="1" class="option-input"><span class="option-text">USA</span></label>
+    <label class="option-label"><input type="radio" name="q42" value="0" class="option-input"><span class="option-text">China</span></label>
+    <label class="option-label"><input type="radio" name="q42" value="0" class="option-input"><span class="option-text">Japan</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">43</span> Samsung belongs to which country?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q43" value="0" class="option-input"><span class="option-text">Japan</span></label>
+    <label class="option-label"><input type="radio" name="q43" value="0" class="option-input"><span class="option-text">China</span></label>
+    <label class="option-label"><input type="radio" name="q43" value="1" class="option-input"><span class="option-text">South Korea</span></label>
+    <label class="option-label"><input type="radio" name="q43" value="0" class="option-input"><span class="option-text">Taiwan</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">44</span> What is a Unicorn startup?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q44" value="0" class="option-input"><span class="option-text">$100 Million</span></label>
+    <label class="option-label"><input type="radio" name="q44" value="0" class="option-input"><span class="option-text">$500 Million</span></label>
+    <label class="option-label"><input type="radio" name="q44" value="1" class="option-input"><span class="option-text">$1 Billion</span></label>
+    <label class="option-label"><input type="radio" name="q44" value="0" class="option-input"><span class="option-text">$10 Billion</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">45</span> Which browser is developed by Google?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q45" value="0" class="option-input"><span class="option-text">Edge</span></label>
+    <label class="option-label"><input type="radio" name="q45" value="0" class="option-input"><span class="option-text">Safari</span></label>
+    <label class="option-label"><input type="radio" name="q45" value="1" class="option-input"><span class="option-text">Chrome</span></label>
+    <label class="option-label"><input type="radio" name="q45" value="0" class="option-input"><span class="option-text">Firefox</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">46</span> Which company owns YouTube?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q46" value="0" class="option-input"><span class="option-text">Microsoft</span></label>
+    <label class="option-label"><input type="radio" name="q46" value="0" class="option-input"><span class="option-text">Meta</span></label>
+    <label class="option-label"><input type="radio" name="q46" value="1" class="option-input"><span class="option-text">Google</span></label>
+    <label class="option-label"><input type="radio" name="q46" value="0" class="option-input"><span class="option-text">Amazon</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">47</span> What does SIM stand for?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q47" value="0" class="option-input"><span class="option-text">System Identity Module</span></label>
+    <label class="option-label"><input type="radio" name="q47" value="0" class="option-input"><span class="option-text">Subscriber Identification Module</span></label>
+    <label class="option-label"><input type="radio" name="q47" value="1" class="option-input"><span class="option-text">Subscriber Identity Module</span></label>
+    <label class="option-label"><input type="radio" name="q47" value="0" class="option-input"><span class="option-text">Service Information Module</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">48</span> Which country launched the first digital national currency?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q48" value="0" class="option-input"><span class="option-text">USA</span></label>
+    <label class="option-label"><input type="radio" name="q48" value="1" class="option-input"><span class="option-text">China</span></label>
+    <label class="option-label"><input type="radio" name="q48" value="0" class="option-input"><span class="option-text">India</span></label>
+    <label class="option-label"><input type="radio" name="q48" value="0" class="option-input"><span class="option-text">Sweden</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">49</span> ICANN manages:</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q49" value="0" class="option-input"><span class="option-text">Internet cables</span></label>
+    <label class="option-label"><input type="radio" name="q49" value="1" class="option-input"><span class="option-text">Domain names</span></label>
+    <label class="option-label"><input type="radio" name="q49" value="0" class="option-input"><span class="option-text">Email servers</span></label>
+    <label class="option-label"><input type="radio" name="q49" value="0" class="option-input"><span class="option-text">Search engines</span></label>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question-text"><span class="question-number">50</span> Which country has the most time zones?</div>
+  <div class="options">
+    <label class="option-label"><input type="radio" name="q50" value="0" class="option-input"><span class="option-text">USA</span></label>
+    <label class="option-label"><input type="radio" name="q50" value="0" class="option-input"><span class="option-text">Russia</span></label>
+    <label class="option-label"><input type="radio" name="q50" value="1" class="option-input"><span class="option-text">France</span></label>
+    <label class="option-label"><input type="radio" name="q50" value="0" class="option-input"><span class="option-text">China</span></label>
+  </div>
+</div>
+
+
+      <div style="margin: 35px 0 25px;">
+        <button type="button" class="btn btn-fullscreen" id="fullscreen-btn">
+          <i>⛶</i> Enter Fullscreen Mode
+        </button>
+      </div>
+
+      <button type="submit" class="btn btn-submit">
+        <i>✓</i> Submit Answers
+      </button>
+    </form>
+    
+    <div class="nav-btns">
+      <button class="btn btn-back" id="back-competition"></button>
+    </div>
+  </div>
+
+  <!-- Result Page (Hidden Initially) -->
+  <div class="container" id="result-page" style="display: none;">
+    <h2>Competition Results</h2>
+    <div class="result-card" id="result-card">
+      <div class="result-card-content">
+        <p>Name: <span id="result-name">John Doe</span></p>
+        <p>Register No: <span id="result-regno">2021CS000</span></p>
+        <p>Year: <span id="result-year">2nd Year</span></p>
+        <p>Competition: <span id="result-competition">Quiz</span></p>
+        <div class="score-label">Your Final Score</div>
+        <div class="score-display" id="score-display">0/50</div>
+        <p>Score: <span id="result-score">0</span> out of 50</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-back" id="back-competition-result"></button>
+      <button class="btn btn-register" id="new-competition"></button>
+    </div>
+  </div>
+
+  <!-- Disqualification Overlay -->
+  <div class="disqualification-overlay" id="disqualification-overlay">
+    <h2>DISQUALIFIED</h2>
+    <p>You have been disqualified from the exam for switching tabs or leaving the exam window.</p>
+    <p>Your exam has been automatically submitted with a score of 0.</p>
+    <button class="btn btn-back" id="disqualification-back">Return to Home Page</button>
+  </div>
+
+  <!-- Warning Modal -->
+  <div class="modal" id="warning-modal">
+    <div class="modal-content">
+      <button class="close-modal" id="close-warning">&times;</button>
+      <h3>EXAM WARNING</h3>
+      <p>You are about to switch tabs or minimize the exam window. This is not allowed during the exam.</p>
+      <p><strong>First violation:</strong> You will receive a warning.</p>
+      <p><strong>Second violation:</strong> Your exam will be automatically submitted with a score of 0.</p>
+      <p>Please stay on this tab until you complete your exam.</p>
+      <div class="modal-buttons">
+        <button class="btn btn-back" id="continue-exam" style="min-width: 240px;">Continue Exam</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Beforeunload Warning Modal -->
+  <div class="modal" id="beforeunload-modal">
+    <div class="modal-content">
+      <button class="close-modal" id="close-beforeunload">&times;</button>
+      <h3>EXAM IN PROGRESS</h3>
+      <p>You are currently taking an exam. If you navigate away from this page, refresh, or close the tab, you will be disqualified.</p>
+      <p>Are you sure you want to leave this page?</p>
+      <div class="modal-buttons">
+        <button class="btn btn-back" id="stay-on-page" style="min-width: 220px;">Stay on Page</button>
+        <button class="btn btn-register" id="leave-page" style="min-width: 220px;">Leave Page (Disqualified)</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const homePage = document.getElementById('home-page');
+    const competitionPage = document.getElementById('competition-page');
+    const registrationPage = document.getElementById('registration-page');
+    const quizPage = document.getElementById('quiz-page');
+    const resultPage = document.getElementById('result-page');
+    const disqualificationOverlay = document.getElementById('disqualification-overlay');
+    const warningModal = document.getElementById('warning-modal');
+    const beforeunloadModal = document.getElementById('beforeunload-modal');
+    const registerBtn = document.getElementById('register-btn');
+    const backHomeBtn = document.getElementById('back-home');
+    const backHomeRegBtn = document.getElementById('back-home-reg');
+    const quizBtn = document.getElementById('quiz-btn');
+    const debugBtn = document.getElementById('debug-btn');
+    const backCompetitionBtn = document.getElementById('back-competition');
+    const backCompetitionResultBtn = document.getElementById('back-competition-result');
+    const newCompetitionBtn = document.getElementById('new-competition');
+    const disqualificationBackBtn = document.getElementById('disqualification-back');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const closeWarningBtn = document.getElementById('close-warning');
+    const continueExamBtn = document.getElementById('continue-exam');
+    const closeBeforeunloadBtn = document.getElementById('close-beforeunload');
+    const stayOnPageBtn = document.getElementById('stay-on-page');
+    const leavePageBtn = document.getElementById('leave-page');
+    const regForm = document.getElementById('regForm');
+    const quizForm = document.getElementById('quizForm');
+    const violationCounter = document.getElementById('violation-counter');
+    const resultCard = document.getElementById('result-card');
+
+    // Tracking variables
+    let isQuizActive = false;
+    let violationCount = 0;
+    let isFullscreen = false;
+    let pageVisibilityState = "visible";
+    let beforeunloadTriggered = false;
+
+    // Page Navigation Functions
+    function showPage(pageToShow) {
+      // Hide all pages
+      homePage.style.display = 'none';
+      competitionPage.style.display = 'none';
+      registrationPage.style.display = 'none';
+      quizPage.style.display = 'none';
+      resultPage.style.display = 'none';
+      
+      // Show selected page
+      pageToShow.style.display = 'block';
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+      
+      // Reset violation counter when leaving quiz page
+      if (pageToShow !== quizPage) {
+        violationCount = 0;
+        violationCounter.textContent = "0";
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+        document.removeEventListener('fullscreenchange', handleFullscreenChange);
+        document.body.classList.remove('fullscreen');
+        isQuizActive = false;
+      }
+      
+      // Set up quiz monitoring when entering quiz page
+      if (pageToShow === quizPage) {
+        isQuizActive = true;
+        violationCount = 0;
+        violationCounter.textContent = "0";
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        localStorage.removeItem('disqualified');
+      }
+    }
+
+    // Handle tab switching and window visibility changes
+    function handleVisibilityChange() {
+      if (!isQuizActive) return;
+      
+      if (document.visibilityState === 'hidden' && pageVisibilityState === 'visible') {
+        // User is switching away from the tab or minimizing the window
+        violationCount++;
+        violationCounter.textContent = violationCount;
+        violationCounter.style.animation = 'none';
+        setTimeout(() => {
+          violationCounter.style.animation = 'bounce 0.6s';
+        }, 10);
+        
+        // Show warning modal for first violation
+        if (violationCount === 1) {
+          warningModal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+        // Disqualify on second violation
+        else if (violationCount >= 2) {
+          disqualifyStudent();
+        }
+      }
+      pageVisibilityState = document.visibilityState;
+    }
+
+    // Handle beforeunload event (refresh, close tab, navigate away)
+    function handleBeforeUnload(e) {
+      if (isQuizActive && !beforeunloadTriggered) {
+        beforeunloadTriggered = true;
+        e.preventDefault();
+        beforeunloadModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        // Prevent default browser dialog
+        e.returnValue = '';
+        return '';
+      }
+    }
+
+    // Handle fullscreen changes
+    function handleFullscreenChange() {
+      isFullscreen = !!document.fullscreenElement;
+      if (isFullscreen) {
+        document.body.classList.add('fullscreen');
+      } else {
+        document.body.classList.remove('fullscreen');
+      }
+    }
+
+    // Disqualify the student
+    function disqualifyStudent() {
+      // Clean up event listeners
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      
+      // Set disqualification flags
+      localStorage.setItem('disqualified', 'true');
+      localStorage.setItem('score', '0');
+      
+      // Show disqualification overlay
+      disqualificationOverlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      
+      // Auto-submit the quiz with 0 score after a delay
+      setTimeout(() => {
+        showResultPage();
+      }, 5000);
+    }
+
+    // Event Listeners for Navigation
+    registerBtn.addEventListener('click', () => {
+      showPage(registrationPage);
+    });
+
+    backHomeBtn.addEventListener('click', () => {
+      showPage(homePage);
+    });
+
+    backHomeRegBtn.addEventListener('click', () => {
+      showPage(homePage);
+    });
+
+    quizBtn.addEventListener('click', () => {
+      showPage(quizPage);
+      // Store competition type
+      localStorage.setItem('competitionType', 'Quiz');
+    });
+
+    debugBtn.addEventListener('click', () => {
+      alert("Debugging competition will be available soon! For now, try the Quiz competition.");
+      showPage(quizPage);
+      localStorage.setItem('competitionType', 'Debugging');
+    });
+
+    backCompetitionBtn.addEventListener('click', () => {
+      if (isQuizActive) {
+        if (confirm("You will lose your progress if you go back. Are you sure?")) {
+          showPage(competitionPage);
+        }
+      } else {
+        showPage(competitionPage);
+      }
+    });
+
+    backCompetitionResultBtn.addEventListener('click', () => {
+      showPage(competitionPage);
+    });
+
+    newCompetitionBtn.addEventListener('click', () => {
+      showPage(competitionPage);
+    });
+
+    disqualificationBackBtn.addEventListener('click', () => {
+      disqualificationOverlay.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      showPage(homePage);
+    });
+
+    // Fullscreen functionality
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    });
+
+    // Warning modal handlers
+    closeWarningBtn.addEventListener('click', () => {
+      warningModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    continueExamBtn.addEventListener('click', () => {
+      warningModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    // Beforeunload modal handlers
+    closeBeforeunloadBtn.addEventListener('click', () => {
+      beforeunloadModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      beforeunloadTriggered = false;
+    });
+
+    stayOnPageBtn.addEventListener('click', () => {
+      beforeunloadModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      beforeunloadTriggered = false;
+    });
+
+    leavePageBtn.addEventListener('click', () => {
+      // Allow navigation to happen
+      beforeunloadTriggered = false;
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      localStorage.setItem('disqualified', 'true');
+      localStorage.setItem('score', '0');
+      beforeunloadModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      showPage(homePage);
+    });
+
+    // Registration Form Handling
+    regForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Get form values
+      const name = document.getElementById('name').value;
+      const regno = document.getElementById('regno').value;
+      const year = document.getElementById('year').value;
+      
+      // Store in localStorage
+      localStorage.setItem('userName', name);
+      localStorage.setItem('regNo', regno);
+      localStorage.setItem('year', year);
+      
+      // Show competition page
+      showPage(competitionPage);
+      
+      // Reset form
+      regForm.reset();
+      
+      // Show success message
+      setTimeout(() => {
+        alert(`Registration successful, ${name}! Welcome to the competitions.`);
+      }, 300);
+    });
+
+    // Quiz Form Handling
+    quizForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Clean up monitoring
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      isQuizActive = false;
+      
+      // Calculate score
+      let score = 0;
+      // Check each question
+      for (let i = 1; i <= 50; i++) {
+        const q = document.querySelector(`input[name="q${i}"]:checked`);
+        if (q && q.value === "1") score++;
+      }
+      
+      // Store score
+      localStorage.setItem('score', score);
+      
+      // Show result page
+      showResultPage();
+    });
+
+    // Result Page Display
+    function showResultPage() {
+      // Get data from localStorage
+      const name = localStorage.getItem('userName') || 'Participant';
+      const regNo = localStorage.getItem('regNo') || 'N/A';
+      const year = localStorage.getItem('year') || 'N/A';
+      const score = localStorage.getItem('score') || '0';
+      const competitionType = localStorage.getItem('competitionType') || 'Quiz';
+      const disqualified = localStorage.getItem('disqualified') === 'true';
+      
+      // Update result page content
+      document.getElementById('result-name').textContent = name;
+      document.getElementById('result-regno').textContent = regNo;
+      document.getElementById('result-year').textContent = year;
+      document.getElementById('result-competition').textContent = competitionType;
+      document.getElementById('result-score').textContent = score;
+      
+      // Handle disqualification display
+      if (disqualified) {
+        document.getElementById('score-display').textContent = 'DISQUALIFIED';
+        document.getElementById('result-score').textContent = '0';
+        resultCard.classList.add('disqualified');
+      } else {
+        document.getElementById('score-display').textContent = `${score}/50`;
+        resultCard.classList.remove('disqualified');
+
+        // Visual feedback based on score
+        if (score >= 40) {
+          resultCard.style.background = 'linear-gradient(135deg, #ff8a00 0%, #da1b60 100%)';
+        } else if (score >= 20) {
+          resultCard.style.background = 'linear-gradient(135deg, #43cea2 0%, #185a9d 100%)';
+        } else {
+          resultCard.style.background = 'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)';
+        }
+      }
+      
+      // Show result page
+      showPage(resultPage);
+      
+      // Show personalized message
+      setTimeout(() => {
+        if (disqualified) {
+          alert(`You have been disqualified for switching tabs during the exam.`);
+        } else if (score >= 4) {
+          alert(`Excellent performance, ${name}! You scored ${score}/50.`);
+        } else if (score >= 2) {
+          alert(`Good effort, ${name}! You scored ${score}/50. Keep learning!`);
+        } else {
+          alert(`${name}, you scored ${score}/50. Better luck next time!`);
+        }
+      }, 500);
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check if user is already registered
+      const isRegistered = localStorage.getItem('userName');
+      
+      // Add hover effects to all buttons
+      const allButtons = document.querySelectorAll('.btn');
+      allButtons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+          button.style.transform = 'translateY(-3px)';
+        });
+        button.addEventListener('mouseleave', () => {
+          button.style.transform = 'translateY(0)';
+        });
+      });
+      
+      // Initialize violation counter
+      violationCounter.textContent = "0";
+      
+      // Set up modal close functionality
+      document.querySelectorAll('.close-modal').forEach(button => {
+        button.addEventListener('click', () => {
+          button.closest('.modal').style.display = 'none';
+          document.body.style.overflow = 'auto';
+          if (button.id === 'close-beforeunload') {
+            beforeunloadTriggered = false;
+          }
+        });
+      });
+      
+      // Close modals when clicking outside content
+      document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if (modal.id === 'beforeunload-modal') {
+              beforeunloadTriggered = false;
+            }
+          }
+        });
+      });
+      
+      // Add smooth scroll behavior
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
